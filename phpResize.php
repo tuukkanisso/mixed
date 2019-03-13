@@ -1,3 +1,5 @@
+/* To resize an uploaded photo so that height is 150px */
+
 <?php
 	$user=$_POST['user'];
 	if(isset($_FILES["uploadImage"]["type"])){
