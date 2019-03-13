@@ -1,3 +1,6 @@
+/* 	How to get own Instagram feed and animate the scroll from tp to bottom and back
+	Starts at line 121 */
+
 import React, { Component } from 'react';
 import files from './imgSearch';
 import jsonPics from './myPics';
