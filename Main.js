@@ -96,49 +96,6 @@ class Main extends Component {
 						<div className="bg-light row shadow-lg rounded" id="welcome" style={{minHeight:windowHeight}}>
 							<Intro />
 						</div>
-						<div className="bg-warning row" id="cv" style={{minHeight:windowHeight}}>
-							<div className="col-12">
-								<div className="row">
-									<div className="col-12 mt-5 px-5">
-										<p className="display-linebreak border text-center m-2 rounded">
-										Hei, ja tervetuloa!{'\n'}Kiva, että herätin kiinnostuksesi! {'\n'} Alla on cv:ni, josta voit katsoa osaamistani myös paperilla. Tämän jälkeen löydät linkit tekemiini sovelluksiin. 
-										</p>
-										<div className="row">
-											<div className="col-6 pointer">
-												<img 
-													src={imgs.cvImg} 
-													alt=""
-													style={{borderRadius:'5px',objectFit:'contain', width:'100%'}} 
-													onClick={()=>{
-														this.cvShow()
-													}}/>
-											</div>
-											<div className="px-3 col-6">
-												<div className="row" style={{height:'100%'}}> 
-													<div className="col-12 border mb-2 justify-content-center" style={{height:'50%'}}> 
-														<h3 className="text-center mt-2">Ravintoaine laskuri</h3>
-														<img 
-															className="d-block mx-auto mt-2 pointer"
-															src={imgs.nutCo} 
-															style={{borderRadius:'5px',objectFit:'contain', maxHeight:'120px'}}
-															onClick={()=>{
-																window.open('http://www.tuukkanisso.com/nutrition','_blank')
-															}}
-															/>
-															<p>
-															
-															</p>
-													</div>
-													<div className="col-12 border justify-content-center" style={{height:'50%'}}> 
-														<h3 className="text-center mt-2">Nopeuspeli</h3>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
