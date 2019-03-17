@@ -73,7 +73,7 @@ body{
 }
 
 .introText{
-	max-height:45%; 
+	max-height:50%; 
 	overflow:hidden;
 	color:#ffffff;
 }
@@ -84,9 +84,14 @@ body{
 	z-index:500;
 	position:absolute
 }
+
 .introPic:hover{
 	opacity:0;
-	color:initial;
+	color:black;
+}
+
+#myIntroAthletics{
+	bottom:0%;
 }
 
 #myAthletics h2{
