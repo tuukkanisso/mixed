@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import reactLogo from '../logo.svg';
 import files from './imgSearch';
 import jsonPics from './myPics';
 import 'fetch-jsonp/build/fetch-jsonp';
 
 const imgs=files.imgs;
-//const pdf=files.pdf;
 const instaImgs=[];
 let list=[];
 let textFiles=files.txt;
@@ -35,6 +35,11 @@ class Intro extends Component{
 		this.getIntro();
 	}
 	
+	showCv(){
+		var a=document.getElementById('fullCv');
+		a.style.display='block';
+	}
+	
 	getIntro(){
 		let intro=(url) =>{
 			return fetch(url)
@@ -58,8 +63,20 @@ class Intro extends Component{
 				});
 			})
 		};
+		let accomplishments=(url) =>{
+			return fetch(url)
+			.then(data=>{
+				return data.text();
+			})
+			.then(text =>{
+				this.setState({
+					accomplishments:text,
+				});
+			})
+		};
 		intro(textFiles.intro);
 		athlete(textFiles.athlete);
+		accomplishments(textFiles.accomplishments);
 	}
 	
 	social(whereTo){
@@ -67,6 +84,9 @@ class Intro extends Component{
 	}
 
 	clickIntro(e){
+		if(e.path[0].id==='cvSpan'){
+			return
+		};
 		var id;
 		for(var i in e.path){
 			if(e.path[i].classList.contains('introText')){
@@ -101,6 +121,15 @@ class Intro extends Component{
 		}
 	}
 	
+	hover(x){
+		x.style.opacity='0';
+		console.log('x');
+	}
+
+	leave(x){
+		x.style.opacity='0.9';
+	}
+	
 	showOff(){
 		var a=document.getElementById('myCareer');
 		var b=document.getElementById('myAthletics');
@@ -125,6 +154,8 @@ class Intro extends Component{
 				a.style.opacity=d;
 				if(count===120){
 					h[0].style.display='none';
+					a.addEventListener('mouseover', ()=>{this.hover(a)});
+					a.addEventListener('mouseleave', ()=>{this.leave(a)});
 				}
 			}
 			else if(count>120&&count<=240){
@@ -132,6 +163,8 @@ class Intro extends Component{
 				b.style.opacity=d;
 				if(count===240){
 					h[1].style.display='none';
+					b.addEventListener('mouseover', ()=>{this.hover(b)});
+					b.addEventListener('mouseleave', ()=>{this.leave(b)});
 				}
 			}else if(count>240&&count<=360){
 				c.style.opacity=d;
@@ -151,7 +184,6 @@ class Intro extends Component{
 			b[k].style.display='none';
 		};
 		a.style.maxHeight='1200px';
-		a.style.color='initial';
 		var c=document.getElementsByClassName('introText');
 		var d=document.getElementsByClassName('introPic');
 		for(var j=0;j<d.length;j++){
@@ -197,16 +229,12 @@ class Intro extends Component{
 		var b=document.getElementById('instafeed');
 		var c=a.parentNode;
 		var topHeight=a.offsetHeight-c.offsetHeight;
-		var topWidth=a.offsetWidth;
 		window.addEventListener('resize',()=>{
 			this.setState({
 				windowWidth:window.innerWidth,
 			});
 			topHeight=a.offsetHeight-c.offsetHeight;
-			topWidth=a.offsetWidth;
-			console.log();
 		});
-		console.log(this.state.list.length);
 		var pos=b.style.top;
 		if(pos!==''){
 			pos=parseInt(pos);
@@ -226,7 +254,7 @@ class Intro extends Component{
 				}
 				if(vertical===true){
 					b.style.top=pos+'px';
-					if(b.style.left!='0px'){
+					if(b.style.left!=='0px'){
 						pos=0;
 					}
 					b.style.left=0;
@@ -237,7 +265,7 @@ class Intro extends Component{
 					if(pos<-(this.state.list.length*150)||pos>0){
 						asc=!asc;
 					}
-					if(b.style.top!='0px'){
+					if(b.style.top!=='0px'){
 						pos=0;
 					}
 					b.style.top=0;
@@ -303,7 +331,18 @@ class Intro extends Component{
 				<div className="headerPage col-12 my-1">
 					<div className="row text-center">
 						<div className="col-12 col-md-8">
-							<h2>Tuukka Nisso</h2>
+							<div className="row justify-content-center">
+								<div>						
+									<img src={reactLogo}
+										id="reactLogo"
+										alt=""
+										style={{height:'48px',width:'48px'}}
+									/>
+								</div>
+								<div>
+									<h2>Tuukka Nisso</h2>
+								</div>
+							</div>
 						</div>
 						<div className="col-12 col-md-4">
 							<img 
@@ -324,6 +363,13 @@ class Intro extends Component{
 								alt="github"
 								onClick={()=>{this.social('github')}}
 							/>
+							<img 
+								className="pointer"
+								style={{height:'48px'}}
+								src={imgs.nutCo}
+								alt="nutCo"
+								onClick={()=>{window.open('http://tuukkanisso.com/nutrition','_blank')}}
+							/>
 						</div>
 					</div>
 				</div>
@@ -331,7 +377,7 @@ class Intro extends Component{
 			</div>
 			<div className="display-linebreak row" style={{height:'75%'}}>
 				<div className="col-12 col-md-8 mb-0">
-					<div className="row m-auto" style={{overflowY:'auto', maxHeight:height-175, height:'100%'}}>
+					<div className="row m-auto text-light" style={{overflowY:'auto', maxHeight:height-175, height:'100%'}}>
 						<div className="col-12 pointer introText" id="myIntro">
 							<div className="row bg-grey rounded">
 								<div id="myCareer" className="introPic pb-2"> 
@@ -339,9 +385,12 @@ class Intro extends Component{
 									<h2 className="imgClick" style={{position:'absolute', zIndex:'500', top:'50%',left:'40%', transform:'translate(-50%,-50%)'}}>Developer</h2>
 								</div>
 								<div className="col-12 text-center">
-									<h5 className="my-2"> Developerina </h5>
+									<h4 className="my-2"> Developerina </h4>
 									<p>
 									{this.state.intro}
+									</p>
+									<p>
+									Katso myös <span id="cvSpan" className="font-weight-bold pointer" onClick={()=>{this.showCv()}}>cv:ni</span>
 									</p>
 								</div>
 								<div className="text-hider-grey text-hider col-12" style={{position:'absolute', bottom:'0', height:'250px'}}></div>
@@ -354,9 +403,12 @@ class Intro extends Component{
 									<h2 className="imgClick" data-title="Athlete" style={{position:'absolute', zIndex:'500', top:'50%',left:'40%', transform:'translate(-50%,-50%)'}}>Athlete</h2>
 								</div>
 								<div className="col-12 text-center">
-									<h5 className="my-2"> Urheilijana </h5>
+									<h4 className="my-2"> Urheilijana </h4>
 									<p>
 										{this.state.athlete}
+									</p>
+									<p className="text-left">
+										{this.state.accomplishments}
 									</p>
 								</div>
 								<div className="text-hider-grey text-hider col-12" style={{position:'absolute', bottom:'0', height:'250px'}}></div>
