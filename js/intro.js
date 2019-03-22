@@ -80,7 +80,11 @@ class Intro extends Component{
 	}
 	
 	social(whereTo){
-		window.open('http://'+whereTo+'.com/tuukkanisso','_blank');
+		if(whereTo==='linkedin'){
+			window.open('http://www.linkedin.com/in/tuukka-nisso-a0386534/','_blank');
+		}else{
+			window.open('http://'+whereTo+'.com/tuukkanisso','_blank');
+		}
 	}
 
 	clickIntro(e){
@@ -135,7 +139,10 @@ class Intro extends Component{
 		var b=document.getElementById('myAthletics');
 		var bT=document.getElementById('myIntroAthletics');
 		var c=document.getElementById('instaContainer');
-		var h=document.getElementsByClassName('imgClick');	
+		var h=document.getElementsByClassName('imgClick');
+		for(var j=0;j<h.length;j++){
+			h[j].style.display='none';
+		}		
 		bT.style.opacity='0';
 		c.style.opacity='0';
 		var d=1;
@@ -183,7 +190,7 @@ class Intro extends Component{
 		for(var k=0;k<b.length;k++){
 			b[k].style.display='none';
 		};
-		a.style.maxHeight='1200px';
+		a.style.maxHeight='initial';
 		var c=document.getElementsByClassName('introText');
 		var d=document.getElementsByClassName('introPic');
 		for(var j=0;j<d.length;j++){
@@ -332,15 +339,16 @@ class Intro extends Component{
 					<div className="row text-center">
 						<div className="col-12 col-md-8">
 							<div className="row justify-content-center">
-								<div>						
-									<img src={reactLogo}
-										id="reactLogo"
-										alt=""
-										style={{height:'48px',width:'48px'}}
-									/>
-								</div>
 								<div>
-									<h2>Tuukka Nisso</h2>
+									<h2>
+										Tuukka						
+										<img src={reactLogo}
+											id="reactLogo"
+											alt=""
+											style={{height:'48px',width:'48px'}}
+										/>
+										Nisso
+									</h2>
 								</div>
 							</div>
 						</div>
@@ -362,6 +370,12 @@ class Intro extends Component{
 								src={imgs.github}
 								alt="github"
 								onClick={()=>{this.social('github')}}
+							/>
+							<img 
+								className="pointer mx-1"
+								src={imgs.linkedin}
+								alt="linkedin"
+								onClick={()=>{this.social('linkedin')}}
 							/>
 							<img 
 								className="pointer"
