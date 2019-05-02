@@ -7,3 +7,5 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(<Main />, document.getElementById('root'));
 
 serviceWorker.unregister();
+
+// Just trying  it out
